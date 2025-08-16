@@ -8,19 +8,16 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setError('')
-    if (!email || !password) {
-      setError('Please enter both email and password')
-      return
-    }
-
-    // Placeholder: replace with real auth call
-    if (email === 'admin@example.com' && password === 'password') {
-      navigate('/admin-dashboard')
-    } else {
-      setError('Invalid credentials — try admin@example.com / password')
+    try{
+         const response = await axios.post("http://localhost:4000/api/auth/login",{
+          email,
+          password
+         });
+         console.log(response)
+    }catch(error){
+           console.log(error)
     }
   }
 
