@@ -1,10 +1,17 @@
 import React from 'react'
-
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
+import Login from './pages/Login'
+import AdminDashboard from './pages/AdminDashboard'
 const App = () => {
   return (
-    <div className='text-5xl'>
-      welcome
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/admin-dashboard" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
