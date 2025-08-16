@@ -10,9 +10,28 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true
+    },
+    password: { type: String, required: true },
+    role: {
+      type: String,
+      enum: ["employee", "admin"],
+      default: "employee",
+      required: true
+    },
+    profilePicture: {
+      type: String,
+      // default: "https://example.com/default-profile.png"
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now
     }
-  },
-  { timestamps: true }
-);
 
-export default mongoose.model("User", userSchema);
+  }
+);
+const User = mongoose.model("User", userSchema);
+export default User;

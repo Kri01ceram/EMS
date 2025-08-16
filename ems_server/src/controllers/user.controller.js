@@ -1,16 +1,19 @@
 // src/controllers/user.controller.js
 import User from "../models/user.js";
+import bcrypt from "bcrypt";
 
-export const createUser = async (req, res) => {
+const userRegister = async() => {
   try {
-    const user = await User.create(req.body);
-    res.status(201).json(user);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+    const hashPassword = await bcrypt.hash("admin",10)
+    const newUser = new User({
+      name: "Admin",
+      email: "admin@gmail.com",
+      password: hashPassword,
+      role: "admin"
+    })
+    await newUser.save();
+  }catch(error){
+    console.log(error);
   }
-};
-
-export const getUsers = async (_req, res) => {
-  const users = await User.find().lean();
-  res.json(users);
-};
+}
+userRegister();
