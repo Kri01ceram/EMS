@@ -18,8 +18,12 @@ const Login = () => {
          });
          console.log(response)
     }catch(error){
-           console.log(error)
+           if(error.response && error.response.data && error.response.data.message){
+            setError( error.response.data.message)
+    }else{
+      setError("An unexpected error occurred")
     }
+  }
   }
 
   return (
